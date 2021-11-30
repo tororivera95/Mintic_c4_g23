@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import mintic.motoshop.models.entity.Cliente;
 import mintic.motoshop.models.service.IClienteService;
 
-@CrossOrigin(origins= {"http://localhost:4200"})
+@CrossOrigin(origins= {"http://localhost:4200", "*"})
 @RestController
 @RequestMapping("/api")
 public class ClienteRestController {
@@ -39,11 +40,13 @@ public class ClienteRestController {
 		return clienteService.findAll();	 
 	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/cliente/{Id}") //Obtenemos los clientes mediante el ID
 	public Cliente show(@PathVariable Long Id) {
 		return clienteService.findById(Id);
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@PostMapping("/clientes") //Se crean los usuarios
 	public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {
 		
@@ -73,7 +76,8 @@ public class ClienteRestController {
 		response.put("Cliente", clienteNew);
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 	}
-	
+
+	@Secured({"ROLE_ADMIN"})
 	@PutMapping("/cliente/{Id}") //Actualizamos los datos mediante los ID
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, @PathVariable Long Id, BindingResult result) {
@@ -117,6 +121,7 @@ public class ClienteRestController {
 	
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping("/clientes/{Id}") //Eliminamos el cliente mediante el ID
 	public ResponseEntity<?> delete(@PathVariable Long Id){
 		

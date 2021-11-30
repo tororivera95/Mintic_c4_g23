@@ -38,5 +38,4 @@ public class ClienteServiceImp implements IClienteService{
 	public void delete(Cliente cliente) { //Se borra un cliente
 		clienteDao.delete(cliente);
 	}
-
 }

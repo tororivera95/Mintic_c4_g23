@@ -16,6 +16,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 @Entity
 @Table(name = "clientes")
 public class Cliente implements Serializable {
@@ -46,16 +47,6 @@ public class Cliente implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
 
-	@NotEmpty(message = "No puede estar vacio")
-	@NotNull(message = "No puede estar vacio")
-	@Column(name = "pass", length = 16, nullable = false)
-	private String contraseña;
-
-	@NotEmpty(message = "No puede estar vacio")
-	@NotNull(message = "No puede estar vacio")
-	@Column(name = "usuario", length = 50, nullable = false, unique = true)
-	private String usuario;
-
 	// Constructor
 	public Cliente() {
 
@@ -69,8 +60,6 @@ public class Cliente implements Serializable {
 		this.email = email;
 		this.direccion = direccion;
 		this.createAt = createAt;
-		this.contraseña = contraseña;
-		this.usuario = usuario;
 	}
 
 	// Get and Set
@@ -120,22 +109,6 @@ public class Cliente implements Serializable {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
-	}
-
-	public String getContraseña() {
-		return contraseña;
-	}
-
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
 	}
 
 	public String getFullName() {
