@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Producto")
+@Table(name="productos")
 public class Producto implements Serializable{
 
 	@Id
@@ -38,7 +38,24 @@ public class Producto implements Serializable{
 	@Column(length = 50, nullable=false)
 	private String velocidad;
 
+	//Constructor
+	public Producto() {
+		
+	}
 	
+	public Producto(long id, String nombre, String marca, String cilindraje, String tipo, String semiauto,
+			String torque, String velocidad) {
+		super();
+		Id = id;
+		this.nombre = nombre;
+		this.marca = marca;
+		this.cilindraje = cilindraje;
+		this.tipo = tipo;
+		this.semiauto = semiauto;
+		this.torque = torque;
+		this.velocidad = velocidad;
+	}
+
 	//Get and Set
 	public long getId() {
 		return Id;
